@@ -1,10 +1,7 @@
 const colors = {
   black: '#000000',
   white: '#ffffff',
-  navy: '#22356E',
-  grey: '#818285',
-  slate: '#D9D9D9',
-  light: '#F4F4F4',
+  blue: '#3090D9',
 }
 
 const spacing = {
@@ -39,10 +36,9 @@ const borderRadius = {
 }
 
 const breakpoints = {
-  phone: 576,
+  phone: 360,
   tablet: 768,
-  laptop: 992,
-  desktop: 1200,
+  desktop: 1440,
 }
 
 export {
