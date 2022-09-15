@@ -39,6 +39,10 @@ const styles = {
     height: 40,
     width: 40,
   }),
+
+  error: css({
+    color: colors.red,
+  }),
 }
 
 export default styles

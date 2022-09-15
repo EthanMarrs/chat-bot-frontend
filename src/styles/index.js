@@ -2,6 +2,7 @@ const colors = {
   black: '#000000',
   white: '#ffffff',
   blue: '#3090D9',
+  red: '#F94336',
 }
 
 const spacing = {
