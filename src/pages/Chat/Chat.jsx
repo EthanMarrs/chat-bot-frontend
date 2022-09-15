@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 
 import Conversation from '../../components/Conversation'
 import SendMesageForm from '../../components/SendMessageForm'
+import Spinner from '../../components/Spinner'
 
 import styles from './styles'
 
@@ -15,6 +16,7 @@ const conversationMutation = gql`
         messages {
           id
           text
+          from
         }
       }
     }
@@ -36,9 +38,12 @@ const Chat = () => {
     <main css={styles.wrapper}>
       {!creating && (
         <Conversation
-          conversationId={conversation.id}
           messages={conversation.messages}
         />
+      )}
+
+      {creating && (
+        <Spinner />
       )}
 
       <SendMesageForm />
