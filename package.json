@@ -10,12 +10,13 @@
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
+    "graphql-request": "^5.0.0",
     "lodash": "^4.17.21",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.35.0",
-    "react-query": "3.38.1"
+    "react-query": "^3.39.2"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.9.2",

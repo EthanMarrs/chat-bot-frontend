@@ -15,8 +15,10 @@ const styles = {
     resize: 'none',
     fontSize: fontSize.small,
     padding: `${spacing.small}px ${spacing.medium}px`,
-    borderRadius: borderRadius.extraLarge,
+    borderRadius: borderRadius.small,
     border: `2px solid ${colors.black}`,
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
 
     '&:focus': {
       outline: 'none',
@@ -25,10 +27,17 @@ const styles = {
   }),
 
   button: css({
-    marginLeft: spacing.small,
-    borderRadius: borderRadius.medium,
-    border: 'none',
-    background: 'none',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: `2px solid ${colors.black}`,
+    borderLeft: 0,
+    borderRadius: borderRadius.small,
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
+
+    background: colors.grey,
 
     '&:hover': {
       cursor: 'pointer',
@@ -36,8 +45,8 @@ const styles = {
   }),
 
   image: css({
-    height: 40,
-    width: 40,
+    height: 35,
+    width: 35,
   }),
 
   error: css({
