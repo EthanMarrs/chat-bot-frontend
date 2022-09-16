@@ -11,6 +11,11 @@ const styles = {
     padding: spacing.medium,
     margin: `${spacing.large}px 0`,
     border: `2px solid ${colors.black}`,
+    whiteSpace: 'break-spaces',
+
+    a: {
+      textDecoration: 'underline',
+    },
 
     [`@media (min-width: ${breakpoints.tablet}px)`]: {
       maxWidth: '60%',

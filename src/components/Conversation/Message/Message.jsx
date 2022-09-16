@@ -1,8 +1,11 @@
+import Linkify from 'react-linkify'
 import styles, { messageTheme } from './styles'
 
 const Message = ({ text, from }) => (
   <div css={[styles.wrapper, messageTheme(from)]}>
-    {text}
+    <Linkify>
+      {text}
+    </Linkify>
   </div>
 )
 
