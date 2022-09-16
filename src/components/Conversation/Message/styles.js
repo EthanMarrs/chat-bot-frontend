@@ -1,16 +1,24 @@
 import { css } from '@emotion/react'
 import {
-  spacing, colors, borderRadius,
+  spacing, colors, borderRadius, breakpoints,
 } from '../../../styles'
 
 const styles = {
   wrapper: css({
     display: 'flex',
-    maxWidth: '40%',
+    maxWidth: '80%',
     borderRadius: borderRadius.small,
     padding: spacing.medium,
     margin: `${spacing.large}px 0`,
     border: `2px solid ${colors.black}`,
+
+    [`@media (min-width: ${breakpoints.tablet}px)`]: {
+      maxWidth: '60%',
+    },
+
+    [`@media (min-width: ${breakpoints.desktop}px)`]: {
+      maxWidth: '40%',
+    },
   }),
 }
 
