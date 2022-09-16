@@ -1,3 +1,3 @@
-import SendMesageForm from './SendMessageForm'
+import SendMessageForm from './SendMessageForm'
 
-export default SendMesageForm
+export default SendMessageForm

@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react'
 import { request, gql } from 'graphql-request'
-import { useMutation } from 'react-query'
-import { useEffect } from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { v4 as uuid } from 'uuid'
 
 import Conversation from '../../components/Conversation'
 import SendMesageForm from '../../components/SendMessageForm'
@@ -8,7 +9,7 @@ import Spinner from '../../components/Spinner'
 
 import styles from './styles'
 
-const conversationMutation = gql`
+const createConversationMutation = gql`
   mutation createConversation {
     createConversation(input: {}) {
       conversation {
@@ -23,12 +24,58 @@ const conversationMutation = gql`
   }
 `
 
+const sendMessageMutation = gql`
+  mutation sendMessage($sendMessageInput: SendMessageInput!) {
+    sendMessage(input: $sendMessageInput) {
+      conversation {
+        id
+        messages {
+          id
+          text
+          from
+        }
+      }
+    }
+  }
+`
+
 const Chat = () => {
+  const [messages, setMessages] = useState([])
+
   const {
     mutate: createConversation,
     isLoading: creating,
     data: { createConversation: { conversation = {} } = {} } = {},
-  } = useMutation(['conversation'], async () => request('/graphql', conversationMutation))
+  } = useMutation(
+    ['conversation'],
+    async () => request('/graphql', createConversationMutation),
+    {
+      onSuccess: data => setMessages(data.createConversation.conversation.messages),
+    },
+  )
+
+  const {
+    mutate: sendMessage,
+    isLoading: sending,
+  } = useMutation(
+    ['message'],
+    async variables => request('/graphql', sendMessageMutation, variables),
+    {
+      onMutate: variables => {
+        const newData = [
+          ...messages,
+          {
+            id: uuid(),
+            text: variables.sendMessageInput.text,
+            from: 'USER',
+          },
+        ]
+
+        setMessages(newData)
+      },
+      onSuccess: data => setMessages(data.sendMessage.conversation.messages),
+    },
+  )
 
   useEffect(() => {
     createConversation()
@@ -37,16 +84,21 @@ const Chat = () => {
   return (
     <main css={styles.wrapper}>
       {!creating && (
-        <Conversation
-          messages={conversation.messages}
-        />
+        <Conversation messages={messages} />
       )}
 
-      {creating && (
+      {(creating || sending) && (
         <Spinner />
       )}
 
-      <SendMesageForm />
+      <SendMesageForm
+        sendMessage={data => sendMessage({
+          sendMessageInput: {
+            conversationId: conversation.id,
+            ...data,
+          },
+        })}
+      />
     </main>
   )
 }

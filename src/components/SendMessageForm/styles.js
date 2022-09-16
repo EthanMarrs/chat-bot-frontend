@@ -10,7 +10,7 @@ const styles = {
     alignItems: 'center',
   }),
 
-  textarea: css({
+  input: css({
     width: '100%',
     resize: 'none',
     fontSize: fontSize.small,
@@ -41,6 +41,10 @@ const styles = {
 
     '&:hover': {
       cursor: 'pointer',
+    },
+
+    '&:disabled': {
+      cursor: 'not-allowed',
     },
   }),
 

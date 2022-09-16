@@ -4,22 +4,25 @@ import send from '../../assets/send.svg'
 
 import styles from './styles'
 
-const SendMessageForm = () => {
+const SendMessageForm = ({ sendMessage }) => {
   const {
-    register, handleSubmit, formState: { isValid },
-  } = useForm()
-  const onSubmit = data => console.log(data)
+    register, handleSubmit, reset, formState: { isValid },
+  } = useForm({ mode: 'onChange' })
+
+  const onSubmit = data => {
+    sendMessage(data)
+    reset()
+  }
 
   return (
     <form css={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <textarea
-        {...register('message', { required: true })}
-        css={styles.textarea}
-        rows="1"
-        name="message"
+      <input
+        {...register('text', { required: true })}
+        css={styles.input}
+        placeholder="Type a message"
       />
 
-      <button css={styles.button} type="submit">
+      <button disabled={!isValid} css={styles.button} type="submit">
         <img css={styles.image} src={send} alt="Send message" />
       </button>
     </form>
