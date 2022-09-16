@@ -1,18 +1,5 @@
-export const request = async (query, variables) => {
-  const response = await fetch(
-    import.meta.env.GRAPHQL_API_URL,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        query,
-        variables,
-      }),
-    },
-  )
+import { request as graphqlRequest } from 'graphql-request'
 
-  const json = await response.json()
-  return json.data
-}
+export const request = async (query, variables) => (
+  graphqlRequest('/graphql', query, variables)
+)

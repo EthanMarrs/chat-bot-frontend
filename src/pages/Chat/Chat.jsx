@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { request, gql } from 'graphql-request'
+import { gql } from 'graphql-request'
 import { useMutation } from '@tanstack/react-query'
 import { v4 as uuid } from 'uuid'
 
 import Conversation from '../../components/Conversation'
 import SendMesageForm from '../../components/SendMessageForm'
 import Spinner from '../../components/Spinner'
+import { request } from '../../helpers/graphql'
 
 import styles from './styles'
 
@@ -48,7 +49,7 @@ const Chat = () => {
     data: { createConversation: { conversation = {} } = {} } = {},
   } = useMutation(
     ['conversation'],
-    async () => request('/graphql', createConversationMutation),
+    async () => request(createConversationMutation),
     {
       onSuccess: data => setMessages(data.createConversation.conversation.messages),
     },
@@ -59,7 +60,7 @@ const Chat = () => {
     isLoading: sending,
   } = useMutation(
     ['message'],
-    async variables => request('/graphql', sendMessageMutation, variables),
+    async variables => request(sendMessageMutation, variables),
     {
       onMutate: variables => {
         const newData = [

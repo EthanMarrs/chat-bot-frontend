@@ -9,7 +9,7 @@ const styles = {
     maxWidth: '40%',
     borderRadius: borderRadius.small,
     padding: spacing.medium,
-    margin: `${spacing.medium}px 0`,
+    margin: `${spacing.large}px 0`,
     border: `2px solid ${colors.black}`,
   }),
 }
