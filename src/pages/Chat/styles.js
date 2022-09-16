@@ -3,11 +3,10 @@ import { spacing, breakpoints } from '../../styles'
 
 const styles = {
   wrapper: css({
-    height: '100%',
+    marginTop: 'auto',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-end',
     alignItems: 'center',
     padding: `${spacing.large}px ${spacing.large}px`,
 
