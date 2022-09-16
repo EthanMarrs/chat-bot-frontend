@@ -5,7 +5,7 @@ import {
 
 const styles = {
   wrapper: css({
-    display: 'flex',
+    display: 'inline',
     maxWidth: '80%',
     borderRadius: borderRadius.small,
     padding: spacing.medium,
