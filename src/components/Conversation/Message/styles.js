@@ -30,6 +30,13 @@ const messageTheme = from => {
     })
   }
 
+  if (from === 'ERROR') {
+    return css({
+      backgroundColor: colors.red,
+      alignSelf: 'flex-end',
+    })
+  }
+
   return css({
     backgroundColor: colors.white,
     alignSelf: 'flex-start',

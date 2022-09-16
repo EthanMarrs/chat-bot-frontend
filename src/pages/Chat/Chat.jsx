@@ -52,6 +52,11 @@ const Chat = () => {
     async () => request(createConversationMutation),
     {
       onSuccess: data => setMessages(data.createConversation.conversation.messages),
+      onError: () => setMessages([{
+        id: uuid(),
+        text: 'Sorry! Something went wrong while starting this conversation.',
+        from: 'ERROR',
+      }]),
     },
   )
 
@@ -75,6 +80,18 @@ const Chat = () => {
         setMessages(newData)
       },
       onSuccess: data => setMessages(data.sendMessage.conversation.messages),
+      onError: () => {
+        const newData = [
+          ...messages,
+          {
+            id: uuid(),
+            text: 'Sorry! Something went wrong while sending your message.',
+            from: 'ERROR',
+          },
+        ]
+
+        setMessages(newData)
+      },
     },
   )
 
