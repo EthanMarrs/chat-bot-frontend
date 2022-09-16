@@ -7,7 +7,7 @@ const styles = {
   form: css({
     width: '100%',
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'stretch',
   }),
 
   input: css({
@@ -23,7 +23,6 @@ const styles = {
   }),
 
   button: css({
-    height: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
