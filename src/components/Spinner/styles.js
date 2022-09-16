@@ -1,5 +1,5 @@
 import { css, keyframes } from '@emotion/react'
-import { spacing, colors } from '../../styles'
+import { spacing, colors, borderRadius } from '../../styles'
 
 // Inspired by: https://codepen.io/rprom/pen/OPdpQR
 
@@ -32,8 +32,8 @@ const styles = {
     backgroundColor: colors.black,
     height: 10,
     width: 10,
-    borderRadius: 25,
-    marginLeft: 2,
+    borderRadius: borderRadius.large,
+    marginLeft: spacing.extraSmall,
   }),
 
   first: css({
