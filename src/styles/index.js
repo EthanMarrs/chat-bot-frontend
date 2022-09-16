@@ -2,8 +2,9 @@ const colors = {
   black: '#000000',
   white: '#ffffff',
   grey: '#EFEFEF',
-  blue: '#3090D9',
+  blue: '#C9F4FE',
   red: '#F94336',
+  yellow: '#FFFEE3',
 }
 
 const spacing = {

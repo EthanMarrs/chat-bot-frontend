@@ -17,7 +17,7 @@ const styles = {
 const messageTheme = from => {
   if (from === 'BOT') {
     return css({
-      backgroundColor: colors.grey,
+      backgroundColor: colors.yellow,
       alignSelf: 'flex-end',
     })
   }

@@ -17,13 +17,9 @@ const styles = {
     padding: `${spacing.small}px ${spacing.medium}px`,
     borderRadius: borderRadius.small,
     border: `2px solid ${colors.black}`,
+    outline: 'none',
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
-
-    '&:focus': {
-      outline: 'none',
-      border: `2px solid ${colors.blue}`,
-    },
   }),
 
   button: css({
@@ -36,8 +32,7 @@ const styles = {
     borderRadius: borderRadius.small,
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
-
-    background: colors.grey,
+    background: colors.blue,
 
     '&:hover': {
       cursor: 'pointer',
