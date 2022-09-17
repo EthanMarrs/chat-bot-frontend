@@ -85,6 +85,10 @@ const useConversation = () => {
     createConversation()
   }, [createConversation])
 
+  useEffect(() => {
+    window.scrollTo(0, document.body.scrollHeight)
+  }, [messages])
+
   return {
     conversationId: conversation.id,
     loading: creating || sending,
