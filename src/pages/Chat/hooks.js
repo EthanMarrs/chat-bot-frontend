@@ -1,22 +1,9 @@
 import { useEffect, useState } from 'react'
 import { gql } from 'graphql-request'
-import { useQuery, useMutation } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { v4 as uuid } from 'uuid'
 
 import { request } from '../../helpers/graphql'
-
-const CONVERSATION_QUERY = gql`
-  query conversation($id: ID!) {
-    conversation(id: $id) {
-      id
-      messages {
-        id
-        text
-        from
-      }
-    }
-  }
-`
 
 const CREATE_CONVERSATION_MUTATION = gql`
   mutation createConversation {
@@ -54,49 +41,27 @@ const ERROR_MESSAGE = {
   from: 'ERROR',
 }
 
-const useLocalStorage = key => {
-  let item
-
-  try {
-    item = window.localStorage.getItem(key)
-  } catch (error) {
-    console.log(error)
-  }
-
-  const setitem = value => {
-    window.localStorage.setItem(key, value)
-  }
-
-  return [item, setitem]
-}
-
 const useConversation = () => {
-  const [conversationId, setConversationId] = useLocalStorage('conversationId')
   const [messages, setMessages] = useState([])
 
-  const { isLoading: fetching, refetch: fetchConversation, status: fetchStatus } = useQuery(
-    ['conversation', conversationId],
-    async () => request(CONVERSATION_QUERY, { id: conversationId }),
-    {
-      enabled: false,
-      onSuccess: data => setMessages(data.conversation.messages),
-    },
-  )
-
-  const { mutate: createConversation, isLoading: creating } = useMutation(
-    ['createConversation'],
+  const {
+    mutate: createConversation,
+    isLoading: creating,
+    data: { createConversation: { conversation = {} } = {} } = {},
+  } = useMutation(
+    ['conversation'],
     async () => request(CREATE_CONVERSATION_MUTATION),
     {
-      onSuccess: data => {
-        setMessages(data.createConversation.conversation.messages)
-        setConversationId(data.createConversation.conversation.id)
-      },
+      onSuccess: data => setMessages(data.createConversation.conversation.messages),
       onError: () => setMessages([ERROR_MESSAGE]),
     },
   )
 
-  const { mutate: sendMessage, isLoading: sending } = useMutation(
-    ['sendMessage'],
+  const {
+    mutate: sendMessage,
+    isLoading: sending,
+  } = useMutation(
+    ['message'],
     async variables => request(SEND_MESSAGE_MUTATION, variables),
     {
       onMutate: variables => {
@@ -117,17 +82,16 @@ const useConversation = () => {
   )
 
   useEffect(() => {
-    if (conversationId && fetchStatus !== 'success') fetchConversation()
-    if (!conversationId) createConversation()
-  }, [conversationId, fetchStatus, fetchConversation, createConversation])
+    createConversation()
+  }, [createConversation])
 
   useEffect(() => {
     window.scrollTo(0, document.body.scrollHeight)
   }, [messages])
 
   return {
-    conversationId,
-    loading: creating || sending || fetching,
+    conversationId: conversation.id,
+    loading: creating || sending,
     messages,
     sendMessage,
   }
@@ -135,5 +99,4 @@ const useConversation = () => {
 
 export {
   useConversation,
-  useLocalStorage,
 }
