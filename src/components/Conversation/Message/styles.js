@@ -31,20 +31,20 @@ const messageTheme = from => {
   if (from === 'BOT') {
     return css({
       backgroundColor: colors.yellow,
-      alignSelf: 'flex-end',
+      alignSelf: 'flex-start',
     })
   }
 
   if (from === 'ERROR') {
     return css({
       backgroundColor: colors.red,
-      alignSelf: 'flex-end',
+      alignSelf: 'flex-start',
     })
   }
 
   return css({
     backgroundColor: colors.white,
-    alignSelf: 'flex-start',
+    alignSelf: 'flex-end',
   })
 }
 
